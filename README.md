@@ -5,7 +5,7 @@
 [![Model](https://img.shields.io/badge/Model-Physics--Based-success)](#model-description)
 [![License](https://img.shields.io/badge/License-Not%20specified-lightgrey)](#license)
 
-MATLAB/Simulink academic project implementing dynamic models of electrical machines. The main work is a physics-based model of a three-phase induction motor in the synchronous $d$-$q$ reference frame, together with open-loop and closed-loop V/f control models.
+MATLAB/Simulink academic project implementing dynamic models of electrical machines. The main work is a physics-based model of a three-phase induction motor in the synchronous $d\text{-}q$ reference frame, together with open-loop and closed-loop V/f control models.
 
 ## Contents
 
@@ -403,7 +403,7 @@ The project documentation includes the following visual material:
 <p align="center">
   <img src="./images/im-dq-architecture.jpeg"
        alt="High-level architecture of the induction motor model"
-       width="900">
+       width="450">
 </p>
 
 ---
@@ -413,7 +413,7 @@ The project documentation includes the following visual material:
 <p align="center">
   <img src="./images/im-simulink-overview.jpeg"
        alt="Overview of the Simulink induction motor model"
-       width="900">
+       width="450">
 </p>
 
 ---
@@ -423,7 +423,7 @@ The project documentation includes the following visual material:
 <p align="center">
   <img src="./images/im-simulink-detail.png"
        alt="Detailed Simulink implementation of the induction motor model"
-       width="900">
+       width="450">
 </p>
 
 ---
@@ -433,7 +433,7 @@ The project documentation includes the following visual material:
 <p align="center">
   <img src="./images/induction-motor-input-data.jpeg"
        alt="Induction motor input data and parameter reference"
-       width="500">
+       width="250">
 </p>
 
 
