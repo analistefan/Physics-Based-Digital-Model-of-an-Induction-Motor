@@ -26,14 +26,14 @@ MATLAB/Simulink academic project implementing dynamic models of electrical machi
 The project models the dynamic behaviour of an induction motor from its electrical and mechanical parameters. The main induction-motor model includes:
 
 - a three-phase voltage source;
-- a Park transformation from $abc$ to $d$-$q$ coordinates;
+- a Park transformation from $abc$ to $d\text{-}q$ coordinates;
 - stator-current and rotor-flux state dynamics;
 - electromagnetic-torque calculation;
 - rotor mechanical dynamics;
 - load-torque input;
 - signal visualisation and workspace export.
 
-The repository also contains separate $d$-$q$ and $\alpha$-$\beta$ models for synchronous machines. These files are included as supplementary academic work; they are not required to run the main induction-motor model.
+The repository also contains separate $d\text{-}q$ and $\alpha\text{-}\beta$  models for synchronous machines. These files are included as supplementary academic work; they are not required to run the main induction-motor model.
 
 ## Repository Contents
 
@@ -60,13 +60,13 @@ The repository also contains separate $d$-$q$ and $\alpha$-$\beta$ models for sy
 
 | File | Description |
 |---|---|
-| `IM/IM_d-q/IM_d_q.m` | Defines the parameters and matrices used by the induction-motor $d$-$q$ model. |
+| `IM/IM_d-q/IM_d_q.m` | Defines the parameters and matrices used by the induction-motor $d\text{-}q$ model. |
 | `IM/IM_d-q/IM_d_q.slx` | Main Simulink model of the induction motor. |
 | `V_F_Control/parametre_IM.m` | Defines induction-motor parameters for the V/f control models. |
 | `V_F_Control/IM_Open_loop.slx` | Open-loop V/f control model. |
 | `V_F_Control/IM_close-loop.slx` | Closed-loop V/f control model with a PID Controller block. |
-| `IM/PMSM_d_q/` | Supplementary synchronous-machine model in $d$-$q$ coordinates. |
-| `IM/PMSM_alpha_beta/` | Supplementary synchronous-machine model in $\alpha$-$\beta$ coordinates. |
+| `IM/PMSM_d_q/` | Supplementary synchronous-machine model in $d\text{-}q$ coordinates. |
+| `IM/PMSM_alpha_beta/` | Supplementary synchronous-machine model in $\alpha\text{-}\beta$ coordinates. |
 
 ## Model Description
 
@@ -119,7 +119,7 @@ Rotor speed and exported signals
 
 ### Park Transformation
 
-The Simulink model calculates the $d$-$q$ stator-voltage components from the three-phase voltages:
+The Simulink model calculates the $d\text{-}q$ stator-voltage components from the three-phase voltages:
 
 $$
 V_{sd} =
@@ -240,7 +240,7 @@ where:
 | $C_r$ | Load torque |
 | $\omega_r$ | Rotor mechanical angular speed |
 
-The electromagnetic-torque subsystem combines the $d$-$q$ stator-current and rotor-flux signals, then applies the gain:
+The electromagnetic-torque subsystem combines the $d\text{-}q$ stator-current and rotor-flux signals, then applies the gain:
 
 $$
 \frac{3}{2}\frac{pM}{L_r}
