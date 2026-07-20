@@ -431,7 +431,7 @@ The project documentation includes the following visual material:
 ## Input Data and Parameter Reference
 
 <p align="center">
-  <img src="./images/induction-motor-input-data.png"
+  <img src="./images/induction-motor-input-data.jpeg"
        alt="Induction motor input data and parameter reference"
        width="500">
 </p>
