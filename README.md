@@ -398,6 +398,22 @@ The project documentation includes the following visual material:
 | `Simulink detailed Block Diag.png` | Detailed Simulink implementation of the induction-motor equations and signal outputs. |
 | `Input Data.jpeg` | Nominal, electrical, and mechanical parameter reference. |
 
+### High-Level Architecture
+
+![Induction motor architecture](docs/images/im-dq-architecture.png)
+
+### Simulink Model Overview
+
+![Simulink model overview](docs/images/im-simulink-overview.png)
+
+### Detailed Simulink Model
+
+![Detailed Simulink block diagram](docs/images/im-simulink-detail.png)
+
+### Input Data and Parameter Reference
+
+![Induction motor input data](docs/images/induction-motor-input-data.png)
+
 ## Scope and Limitations
 
 - The project is based on MATLAB/Simulink simulation models.
