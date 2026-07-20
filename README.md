@@ -401,7 +401,7 @@ The project documentation includes the following visual material:
 ## High-Level Architecture
 
 <p align="center">
-  <img src="./docs/images/im-dq-architecture.jpeg"
+  <img src="./images/im-dq-architecture.jpeg"
        alt="High-level architecture of the induction motor model"
        width="900">
 </p>
@@ -411,7 +411,7 @@ The project documentation includes the following visual material:
 ## Simulink Model Overview
 
 <p align="center">
-  <img src="./docs/images/im-simulink-overview.jpeg"
+  <img src="./images/im-simulink-overview.jpeg"
        alt="Overview of the Simulink induction motor model"
        width="900">
 </p>
@@ -421,7 +421,7 @@ The project documentation includes the following visual material:
 ## Detailed Simulink Model
 
 <p align="center">
-  <img src="./docs/images/im-simulink-detail.png"
+  <img src="./images/im-simulink-detail.png"
        alt="Detailed Simulink implementation of the induction motor model"
        width="900">
 </p>
@@ -431,7 +431,7 @@ The project documentation includes the following visual material:
 ## Input Data and Parameter Reference
 
 <p align="center">
-  <img src="./docs/images/induction-motor-input-data.png"
+  <img src="./images/induction-motor-input-data.png"
        alt="Induction motor input data and parameter reference"
        width="500">
 </p>
