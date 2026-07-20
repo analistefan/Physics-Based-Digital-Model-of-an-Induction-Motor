@@ -398,35 +398,44 @@ The project documentation includes the following visual material:
 | `Simulink detailed Block Diag.png` | Detailed Simulink implementation of the induction-motor equations and signal outputs. |
 | `Input Data.jpeg` | Nominal, electrical, and mechanical parameter reference. |
 
-### High-Level Architecture
+## High-Level Architecture
 
 <p align="center">
-  <img src="docs/images/im-dq-architecture.png" alt="Induction Motor High-Level Architecture" width="900">
+  <img src="./docs/images/im-dq-architecture.jpeg"
+       alt="High-level architecture of the induction motor model"
+       width="900">
 </p>
 
 ---
 
-### Simulink Model Overview
+## Simulink Model Overview
 
 <p align="center">
-  <img src="docs/images/im-simulink-overview.png" alt="Simulink Model Overview" width="900">
+  <img src="./docs/images/im-simulink-overview.jpeg"
+       alt="Overview of the Simulink induction motor model"
+       width="900">
 </p>
 
 ---
 
-### Detailed Simulink Model
+## Detailed Simulink Model
 
 <p align="center">
-  <img src="docs/images/im-simulink-detail.png" alt="Detailed Simulink Block Diagram" width="900">
+  <img src="./docs/images/im-simulink-detail.png"
+       alt="Detailed Simulink implementation of the induction motor model"
+       width="900">
 </p>
 
 ---
 
-### Input Data and Parameter Reference
+## Input Data and Parameter Reference
 
 <p align="center">
-  <img src="docs/images/induction-motor-input-data.png" alt="Induction Motor Input Data and Parameters" width="900">
+  <img src="./docs/images/induction-motor-input-data.png"
+       alt="Induction motor input data and parameter reference"
+       width="500">
 </p>
+
 
 ## Scope and Limitations
 
