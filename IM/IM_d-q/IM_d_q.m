@@ -1,0 +1,26 @@
+clc;
+clear;
+Vs=200;
+freq = 2*pi*50;
+theta0 = 0;
+t=0:0.01:1;
+Rr=1.8;
+J=0.07;
+f=0;
+p=2;
+Rs=1.8;
+M=0.15;
+Ls=0.1554;
+Lr=0.1568;
+ws=2*pi*50;
+sigma=1-(M^2)/(Ls*Lr);
+Tr=Lr/Rr;
+Ts=Ls/Rs;
+ks=M/(sigma*Ls*Lr);
+lamda1=Rs/(sigma*Ls);
+lamda2=(Rr*M*M)/(sigma*Ls*Lr*Lr);
+lamda=lamda1+lamda2;
+
+B=[1/(Ls*sigma) 0; 0 1/(Ls*sigma); 0 0; 0 0];
+A1=[-lamda ws ks/Tr 0; -ws -lamda 0 ks/Tr; M/Tr 0 -1/Tr ws; 0 M/Tr -ws -1/Tr;];
+A2=[0 0 0 ks; 0 0 -ks 0; 0 0 0 -1; 0 0 1 0];
