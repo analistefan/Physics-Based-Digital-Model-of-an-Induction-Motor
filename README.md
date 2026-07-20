@@ -67,3 +67,50 @@ The repository also contains separate $d$-$q$ and $\alpha$-$\beta$ models for sy
 | `V_F_Control/IM_close-loop.slx` | Closed-loop V/f control model with a PID Controller block. |
 | `IM/PMSM_d_q/` | Supplementary synchronous-machine model in $d$-$q$ coordinates. |
 | `IM/PMSM_alpha_beta/` | Supplementary synchronous-machine model in $\alpha$-$\beta$ coordinates. |
+
+## Model Description
+
+The main model is located in:
+
+```text
+IM/IM_d-q/IM_d_q.slx
+```
+
+The three-phase source generates $V_a$, $V_b$, and $V_c$. These voltages are transformed into synchronous-reference-frame components $V_{sd}$ and $V_{sq}$ using the Park transformation.
+
+The induction-motor state vector is:
+
+$$
+x =
+\begin{bmatrix}
+i_{sd} &
+i_{sq} &
+\phi_{rd} &
+\phi_{rq}
+\end{bmatrix}^{T}
+$$
+
+where:
+
+- $i_{sd}$ and $i_{sq}$ are stator-current components;
+- $\phi_{rd}$ and $\phi_{rq}$ are rotor-flux components.
+
+The model calculates the state derivatives, integrates them, computes electromagnetic torque, and applies the mechanical equation to obtain rotor speed.
+
+```text
+Three-phase source
+        ↓
+Park transformation
+        ↓
+d-q stator voltages
+        ↓
+Electrical state-space model
+        ↓
+Stator currents and rotor flux
+        ↓
+Electromagnetic torque
+        ↓
+Mechanical dynamics
+        ↓
+Rotor speed and exported signals
+```
