@@ -114,3 +114,299 @@ Mechanical dynamics
         ↓
 Rotor speed and exported signals
 ```
+
+## Implemented Equations
+
+### Park Transformation
+
+The Simulink model calculates the $d$-$q$ stator-voltage components from the three-phase voltages:
+
+$$
+V_{sd} =
+\sqrt{\frac{2}{3}}
+\left[
+V_a\cos(\theta)
++
+V_b\cos\left(\theta-\frac{2\pi}{3}\right)
++
+V_c\cos\left(\theta+\frac{2\pi}{3}\right)
+\right]
+$$
+
+$$
+V_{sq} =
+-\sqrt{\frac{2}{3}}
+\left[
+V_a\sin(\theta)
++
+V_b\sin\left(\theta-\frac{2\pi}{3}\right)
++
+V_c\sin\left(\theta+\frac{2\pi}{3}\right)
+\right]
+$$
+
+### Electrical State-Space Model
+
+The electrical dynamics are implemented as:
+
+$$
+\dot{x} = A_1x + \omega_r A_2x + Bu
+$$
+
+with:
+
+$$
+u =
+\begin{bmatrix}
+V_{sd} \\
+V_{sq}
+\end{bmatrix}
+$$
+
+The script defines:
+
+$$
+\sigma = 1 - \frac{M^2}{L_sL_r}
+$$
+
+$$
+T_r = \frac{L_r}{R_r}
+$$
+
+$$
+\lambda_1 = \frac{R_s}{\sigma L_s}
+$$
+
+$$
+\lambda_2 =
+\frac{R_rM^2}{\sigma L_sL_r^2}
+$$
+
+$$
+\lambda = \lambda_1 + \lambda_2
+$$
+
+$$
+k_s = \frac{M}{\sigma L_sL_r}
+$$
+
+The state matrices implemented in `IM_d_q.m` are:
+
+$$
+A_1 =
+\begin{bmatrix}
+-\lambda & \omega_s & \frac{k_s}{T_r} & 0 \\
+-\omega_s & -\lambda & 0 & \frac{k_s}{T_r} \\
+\frac{M}{T_r} & 0 & -\frac{1}{T_r} & \omega_s \\
+0 & \frac{M}{T_r} & -\omega_s & -\frac{1}{T_r}
+\end{bmatrix}
+$$
+
+$$
+A_2 =
+\begin{bmatrix}
+0 & 0 & 0 & k_s \\
+0 & 0 & -k_s & 0 \\
+0 & 0 & 0 & -1 \\
+0 & 0 & 1 & 0
+\end{bmatrix}
+$$
+
+$$
+B =
+\begin{bmatrix}
+\frac{1}{L_s\sigma} & 0 \\
+0 & \frac{1}{L_s\sigma} \\
+0 & 0 \\
+0 & 0
+\end{bmatrix}
+$$
+
+### Mechanical Dynamics
+
+Rotor speed is obtained from the mechanical torque balance:
+
+$$
+J\frac{d\omega_r}{dt} + f\omega_r = C_{em} - C_r
+$$
+
+where:
+
+| Symbol | Description |
+|---|---|
+| $J$ | Rotor inertia |
+| $f$ | Viscous-friction coefficient |
+| $C_{em}$ | Electromagnetic torque |
+| $C_r$ | Load torque |
+| $\omega_r$ | Rotor mechanical angular speed |
+
+The electromagnetic-torque subsystem combines the $d$-$q$ stator-current and rotor-flux signals, then applies the gain:
+
+$$
+\frac{3}{2}\frac{pM}{L_r}
+$$
+
+## Model Parameters
+
+### Parameters in `IM_d_q.m`
+
+| Parameter | Value | Unit |
+|---|---:|---|
+| $V_s$ | 200 | V |
+| $R_s$ | 1.8 | $\Omega$ |
+| $R_r$ | 1.8 | $\Omega$ |
+| $L_s$ | 0.1554 | H |
+| $L_r$ | 0.1568 | H |
+| $M$ | 0.15 | H |
+| $J$ | 0.07 | kg·m² |
+| $f$ | 0 | — |
+| $p$ | 2 | — |
+| $\omega_s$ | $2\pi \times 50$ | rad/s |
+
+### Parameters in `parametre_IM.m`
+
+| Parameter | Value | Unit |
+|---|---:|---|
+| $V_s$ | 220 | V |
+| $R_s$ | 1.8 | $\Omega$ |
+| $R_r$ | 1.8 | $\Omega$ |
+| $L_s$ | 0.1554 | H |
+| $L_r$ | 0.1568 | H |
+| $M$ | 0.15 | H |
+| $J$ | 0.07 | kg·m² |
+| $f$ | 0 | — |
+| $p$ | 2 | — |
+
+### Reference Data Shown in the Project Documentation
+
+| Quantity | Value |
+|---|---:|
+| Rated power | 4 kW |
+| Nominal voltage | 220/380 V |
+| Nominal current | 15 A |
+| Number of poles | 2 |
+| Power factor | 0.8 |
+| Rated speed | 1500 rpm |
+| Stator resistance | 1.2 $\Omega$ |
+| Rotor resistance | 1.8 $\Omega$ |
+| Stator inductance | 0.1554 H |
+| Rotor inductance | 0.1568 H |
+| Mutual inductance | 0.15 H |
+| Rotor inertia | 0.07 kg·m² |
+
+> The supplied input-data figure lists $R_s = 1.2\ \Omega$, whereas the MATLAB scripts use $R_s = 1.8\ \Omega$. This README reports both values exactly as they appear in the available project material.
+
+## Simulation Models and Configurations
+
+| Model | Simulation setup recorded in the model |
+|---|---|
+| `IM_d_q.slx` | Start time: 0 s; stop time: 1 s; solver: `ode3`; fixed step: $10^{-4}$ s |
+| `IM_Open_loop.slx` | Start time: 0 s; stop time: 1 s; solver: `ode3`; fixed step: $10^{-4}$ s |
+| `IM_close-loop.slx` | Start time: 0 s; stop time: 1 s; fixed-step configuration: $10^{-5}$ s |
+| `MS_alpha_beta.slx` | Start time: 0 s; stop time: 100 s; solver: `ode3`; fixed step: $10^{-4}$ s |
+
+### Stored Reference and Load Inputs
+
+| Model | Input block | Stored values |
+|---|---|---|
+| `IM_d_q.slx` | `Cr` | Final value: 15 |
+| `IM_Open_loop.slx` | `Wsref` | $2\pi \times 25$ rad/s before 5 s; $2\pi \times 50$ rad/s after 5 s |
+| `IM_close-loop.slx` | `Wsref1` | $2\pi \times 50$ rad/s before 0.5 s; $2\pi \times 100$ rad/s after 0.5 s |
+| `MS_alpha_beta.slx` | `Cr` | Time: 300 s; final value: 0.1 |
+
+The stored speed-reference step in `IM_Open_loop.slx` is configured at 5 s, while the model stop time is 1 s. Therefore, the stored open-loop simulation configuration does not reach this step.
+
+## Reproducing the Simulations
+
+### Requirements
+
+The Simulink files were saved with MATLAB releases ranging from R2014a to R2019a. MATLAB and Simulink R2019a are recommended to open all supplied models.
+
+Run one model at a time and clear the MATLAB workspace before switching between induction-machine and synchronous-machine files.
+
+### Main Induction-Motor Model
+
+```matlab
+clear; clc; close all;
+
+cd(fullfile("IM", "IM_d-q"));
+
+run("IM_d_q.m");
+open_system("IM_d_q.slx");
+
+sim("IM_d_q");
+```
+
+### Open-Loop V/f Model
+
+```matlab
+clear; clc; close all;
+
+cd(fullfile("V_F_Control"));
+
+run("parametre_IM.m");
+open_system("IM_Open_loop.slx");
+
+sim("IM_Open_loop");
+```
+
+### Closed-Loop V/f Model
+
+```matlab
+clear; clc; close all;
+
+cd(fullfile("V_F_Control"));
+
+run("parametre_IM.m");
+open_system("IM_close-loop.slx");
+
+sim("IM_close-loop");
+```
+
+## Available Outputs
+
+The main induction-motor model exports the following signals using `To Workspace` blocks:
+
+| MATLAB variable | Signal |
+|---|---|
+| `Cem` | Electromagnetic torque |
+| `omega_r` | Rotor mechanical speed |
+| `Isabc` | Three-phase stator currents |
+| `phirabc` | Rotor-flux output |
+| `flux` | Flux output |
+| `Isa` | Stator-current component |
+
+The model also contains scopes for:
+
+- three-phase supply voltage;
+- stator currents;
+- electromagnetic torque;
+- rotor flux;
+- single-phase flux output;
+- mechanical speed.
+
+The V/f control models contain scopes for inverter output voltage, currents, electromagnetic torque, flux, and speed.
+
+## Project Figures
+
+The project documentation includes the following visual material:
+
+| File | Description |
+|---|---|
+| `IM Block Diag.jpeg` | High-level representation of the induction-motor block, its inputs, outputs, and state-space equation. |
+| `IM Simulink Block.jpeg` | Overview of the three-phase source, Park transformation, induction-motor subsystem, and scopes. |
+| `Simulink detailed Block Diag.png` | Detailed Simulink implementation of the induction-motor equations and signal outputs. |
+| `Input Data.jpeg` | Nominal, electrical, and mechanical parameter reference. |
+
+## Scope and Limitations
+
+- The project is based on MATLAB/Simulink simulation models.
+- The provided files do not include experimental measurements or validation data.
+- The supplied files do not include automatic result-processing scripts.
+- The models use manually defined electrical and mechanical parameters.
+- The repository contains separate induction-machine and synchronous-machine models; they use different parameter scripts and should not be run in the same workspace without clearing it first.
+- The README describes the available scripts, models, parameters, scopes, and exported variables only.
+
+## License
+
+No licence file is included in the supplied project files.
